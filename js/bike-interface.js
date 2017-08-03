@@ -1,16 +1,23 @@
-var recoveredBikes = require('./../js/bikes.js').recoveredBikesModule;
+var Bikes = require('./../js/bikes.js').bikesModule;
 
-var displayRecoveredBikes = function(city, bikeData) {
-  $('.results').append("<li>" + bikeData + "</li>");
+var displayBikes = function(manufacturer, location, bikeData) {
+  console.log(bikeData);
+
+  bikeData.forEach(function(bike){
+    // console.log(bike);
+    $('#results').append("<li>" + bike.title + " " + "serial number " + bike.serial + " " + bike.frame_colors + "</li>");
+  });
 };
 
 
 
 $(document).ready(function(){
+  var bikes = new Bikes();
   $('#bike-location-form').submit(function(event){
     event.preventDefault();
-    var city = $('#city').val();
-    $('#city').val("");
-    recoveredBikeObject.getBikes(city, displayRecoveredBikes);
+    var location = $('#city').val();
+    var manufacturer = $('#manufacturer').val();
+    bikes.getBikes(manufacturer, location, displayBikes);
+
   });
 });
